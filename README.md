@@ -103,6 +103,23 @@ npm start
 
 Open [http://localhost:4001](http://localhost:4001) and connect MetaMask to **Localhost 8545** (or your chosen RPC).
 
+### Optional: KYC / Compliance Webhook Server
+
+This repo includes `server.js`, a minimal Express server that receives KYC webhooks
+and updates on-chain compliance (e.g., allowlist / credential hash).
+
+**Env (.env):**
+PORT=4000
+RPC_URL=https://sepolia.infura.io/v3/<key>
+ESCROW_ADDRESS=<from src/config.json>
+WEBHOOK_SECRET=<from KYC provider>
+DIDIT_API_KEY=<if you call their API>
+NGROK_AUTHTOKEN=<optional, for public URL>
+
+**Run locally:**
+npm run kyc:server         # or: node server.js
+(optional) expose via ngrok for webhook callbacks
+
 ---
 
 ## Sepolia Testnet
@@ -133,26 +150,10 @@ npx hardhat run scripts/grant-roles.js --network sepolia
 No need to restart `npm start`—just switch the MetaMask network to **Sepolia**.
 (App auto-selects `src/config.json` by `chainId` and uses your injected provider.)
 
-### Optional: KYC / Compliance Webhook Server
-
-This repo includes `server.js`, a minimal Express server that receives KYC webhooks
-and updates on-chain compliance (e.g., allowlist / credential hash).
-
-**Env (.env):**
-PORT=4000
-RPC_URL=https://sepolia.infura.io/v3/<key>
-ESCROW_ADDRESS=<from src/config.json>
-WEBHOOK_SECRET=<from KYC provider>
-DIDIT_API_KEY=<if you call their API>
-NGROK_AUTHTOKEN=<optional, for public URL>
-
-**Run locally:**
-npm run kyc:server         # or: node server.js
-# (optional) expose via ngrok for webhook callbacks
-
 ---
 
 ## Acknowledgements
 
 * Inspired by Dapp University’s **Millow** project
 * Thanks to the open-source Ethereum & Hardhat communities
+
